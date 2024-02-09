@@ -1,0 +1,77 @@
+Es 1
+
+ SELECT COUNT(*) AS TotVerbali
+  FROM [dbo].[Verbale]
+
+Es 2
+
+ SELECT IDAngrafica, COUNT(*)
+  FROM [dbo].[Verbale]
+  GROUP BY IDAngrafica
+
+Es 3
+
+ SELECT IDViolazione, Descrizione, COUNT(*) 
+  FROM [dbo].[Violazione]
+  GROUP BY IDViolazione, Descrizione
+
+Es 4
+
+SELECT v.IDAngrafica, a.Cognome, a.Nome,  sum(v.DecurtamentoPunti) AS TotPuntiDecurtati
+  FROM [dbo].[Verbale] AS v
+  JOIN dbo.Anagrafica AS a ON a.IDAnagrafica = v.IDAngrafica 
+  GROUP BY v.IDAngrafica, a.Cognome, a.Nome
+
+Es 5
+
+SELECT a.Cognome, a.Nome, v.DataViolazione, v.IndirizzoViolazione, v.Import, v.DecurtamentoPunti
+  FROM [dbo].[Verbale] AS v
+  join dbo.Anagrafica AS a ON a.IDAnagrafica = v.IDAngrafica 
+  WHERE a.Citta LIKE '%Palermo&'
+
+Es 6
+
+SELECT a.Cognome, a.Nome, v.DataViolazione, v.IndirizzoViolazione, v.Import, v.DecurtamentoPunti
+  FROM [dbo].[Verbale] AS v
+  join dbo.Anagrafica AS a ON a.IDAnagrafica = v.IDAngrafica 
+  WHERE v.DataViolazione BETWEEN '2009-02-01' AND  '2009-07-31'
+
+Es 7
+
+SELECT v.IDAngrafica, a.Cognome, a.Nome,  sum(v.Import) AS TotImporto
+  FROM [dbo].[Verbale] AS v
+  JOIN dbo.Anagrafica AS a ON a.IDAnagrafica = v.IDAngrafica 
+  GROUP BY v.IDAngrafica, a.Cognome, a.Nome
+
+Es 8
+
+SELECT *
+  FROM [dbo].[Anagrafica] 
+  WHERE Citta LIKE '%Palermo%'
+
+Es 9
+
+SELECT a.Cognome, a.Nome, v.DataViolazione, v.Import, v.DecurtamentoPunti, A.Citta
+  FROM [dbo].[Verbale] AS v
+  JOIN dbo.Anagrafica AS a ON a.IDAnagrafica = v.IDAngrafica 
+  WHERE v.DataViolazione LIKE '2024-01-05'
+
+Es 10
+
+SELECT COUNT(*), Nominativo_Agente
+  FROM [dbo].[Verbale] AS v
+  GROUP BY Nominativo_Agente
+
+Es 11
+
+SELECT a.Cognome, a.Nome, v.DataViolazione, v.IndirizzoViolazione, v.Import, v.DecurtamentoPunti
+  FROM [dbo].[Verbale] AS v
+  join dbo.Anagrafica AS a ON a.IDAnagrafica = v.IDAngrafica 
+  WHERE v.DecurtamentoPunti > 5
+
+Es 12
+
+SELECT a.Cognome, a.Nome, v.DataViolazione, v.IndirizzoViolazione, v.Import, v.DecurtamentoPunti
+  FROM [dbo].[Verbale] AS v
+  join dbo.Anagrafica AS a ON a.IDAnagrafica = v.IDAngrafica 
+  WHERE v.iMPORT > 400

@@ -1,0 +1,35 @@
+SP 1
+
+CREATE PROCEDURE GetContravenzioniAnno
+    @Anno int
+AS
+BEGIN
+    SELECT * 
+	FROM Verbale AS v
+  join dbo.Anagrafica AS a on a.IDAnagrafica = v.IDAngrafica 
+  WHERE year(v.DataViolazione) like @Anno
+END
+GO
+
+SP 2
+
+CREATE PROCEDURE GetTotalePuntiDecurtati
+    (@data DATE)
+AS
+BEGIN
+    SELECT SUM(DecurtamentoPunti) AS TotPuntiDecurtati
+	FROM Verbale 
+	WHERE DataViolazione LIKE @data
+END
+GO
+
+SP 3
+
+CREATE PROCEDURE EliminaVerbale
+    (@id INT)
+AS
+BEGIN
+    DELETE FROM Verbale
+	WHERE IDVerbale LIKE @id
+END
+GO
